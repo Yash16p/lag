@@ -1,7 +1,8 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
-import FileUpload from "./components/try";
+// import FileUpload from "./components/try";
+// import Tri from "./components/tri";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Navbar/>
       <hr></hr>
       <HeroSection/>
-      {/* <FileUpload/> */}
+      
+      
     </div>
   );
 }

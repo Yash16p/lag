@@ -9,7 +9,10 @@ module.exports = {
         customGreen: '#E2FB6C',
         Routecho : '#004838',
         bord : '#F5F6F3',
-        inp : '#D8D3D3'
+        inp : '#D8D3D3',
+        name : '#E0E7ED',
+        darkG: '#18AB56',
+        greey : '#828282'
       },
     },
   },

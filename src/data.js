@@ -2,7 +2,7 @@ export const data = [
   {
     name: "Albert Flores",
     timestamp: "23 August, 12:00 PM",
-    score: "95%",
+    score: "95",
     status: "Shortlisted",
     resume: "Resume.pdf",
     statusColor: "text-green-500",
@@ -10,7 +10,7 @@ export const data = [
   {
     name: "Wade Warren",
     timestamp: "23 August, 12:00 PM",
-    score: "88%",
+    score: "88",
     status: "Shortlisted",
     resume: "Resume.pdf",
     statusColor: "text-green-500",
@@ -18,7 +18,7 @@ export const data = [
   {
     name: "Courtney Henry",
     timestamp: "23 August, 12:00 PM",
-    score: "75%",
+    score: "75",
     status: "Waitlisted",
     resume: "Resume.pdf",
     statusColor: "text-yellow-500",
@@ -26,7 +26,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "60",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
@@ -34,7 +34,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "60",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
@@ -42,7 +42,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "60",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
@@ -50,7 +50,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "60",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
@@ -58,7 +58,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "84",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
@@ -66,7 +66,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "69",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
@@ -74,7 +74,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "92",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
@@ -82,7 +82,7 @@ export const data = [
   {
     name: "Jacob Jones",
     timestamp: "23 August, 12:00 PM",
-    score: "60%",
+    score: "89",
     status: "Rejected",
     resume: "Resume.pdf",
     statusColor: "text-red-500",
