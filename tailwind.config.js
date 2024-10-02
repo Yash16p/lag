@@ -12,7 +12,8 @@ module.exports = {
         inp : '#D8D3D3',
         name : '#E0E7ED',
         darkG: '#18AB56',
-        greey : '#828282'
+        greey : '#828282',
+        kala : '#333333'
       },
     },
   },

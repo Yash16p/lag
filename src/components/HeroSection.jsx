@@ -7,13 +7,15 @@ import {
   MdOutlineShoppingBag, MdPeople, MdOutlineArrowDropUp, MdOutlineArrowDropDown, MdAssignment,
   MdDescription, MdFilterList, MdArrowBackIosNew, MdArrowForwardIos
 } from 'react-icons/md';
+import { CiCirclePlus } from "react-icons/ci";
 
 import { FiPhone, FiMail, FiFileText, FiMessageSquare, FiX } from "react-icons/fi";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle, AiOutlineDown } from "react-icons/ai";
 import { FaClock } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaSortimport, FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 import { data } from '../data'
 import { TbCheckbox, TbChevronDown } from "react-icons/tb";
+import { MdOutlineLeaderboard } from "react-icons/md";
 // import sidebar from '../assests/sidebar.svg'
 import { ReactComponent as SidebarIcon } from '../assests/SidebarIcon.svg';
 // import plus from '../assests/PLUS.png'
@@ -26,10 +28,17 @@ import { RiDonutChartLine } from "react-icons/ri";
 import carbonSkillLevel from '../assests/skill-level.svg';
 import { IoDocumentOutline } from "react-icons/io5";
 import { TfiLinkedin } from "react-icons/tfi";
+import { LuSnowflake } from "react-icons/lu";
+import { BiHide } from "react-icons/bi";
+import { FaHome, FaPlus, FaCog } from "react-icons/fa";
+import { IoHomeOutline } from "react-icons/io5";
+import { HiOutlineCog } from "react-icons/hi";
 
-function HeroSection() {
+function HeroSection(key) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isOpenWE, setIsOpenWE] = useState(false);
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: 'asc' });
+
   const [isOpenEQ, setIsOpenEQ] = useState(false);
   const [isOpenSS, setIsOpenSS] = useState(false);
   const [isOpenOA, setIsOpenOA] = useState(false);
@@ -55,6 +64,8 @@ function HeroSection() {
     redux: false,
     excite: false,
   });
+
+  
 
   const toggleDropdownOA = () => {
     setIsOAOpen(!isOAOpen);
@@ -159,12 +170,12 @@ function HeroSection() {
   };
 
   return (
-    <div className='flex mt-9 w-full'>
+    <div className='flex mt-5 w-full'>
       {/* left panel */}
 
       {/* Sidebar */}
       {isSidebarOpen && (
-        <div className="w-[23%] min-h-screen border-inp border-[1px] rounded-md">
+        <div className="w-[23%] min-h-screen border-inp  border-[1px] rounded-md">
           <div className="p-3 w-full bg-white ">
             {/* Spikes Section */}
             <div className='mb-4'>
@@ -434,31 +445,39 @@ function HeroSection() {
 
 
       {/* Icon panel (for the 10% width) */}
+      {/* Closed Sidebar */}
       {!isSidebarOpen && (
-        <div className="w-[6%] hidden sm:flex min-h-screen bg-gray-100 flex-col mt-8 items-center py-4 gap-y-2">
-          {/* Icons to be relocated here */}
-          <GiBullseye className='h-[20px] w-[20px] mb-4 text-Routecho' />
-          <MdOutlineShoppingBag className='h-[20px] w-[20px] mb-4 text-Routecho' />
-          <GoMortarBoard className='h-[20px] w-[20px] mb-4 text-Routecho' />
-          <MdPeople className='h-[20px] w-[20px] mb-4 text-Routecho' />
-          <MdAssignment className='h-[20px] w-[20px] mb-4 text-Routecho' />
-          <BsPatchQuestion className='h-[20px] w-[20px] mb-4 text-Routecho' />
+        <div className="w-[6%] hidden sm:flex min-h-screen bg-gray-100 flex-col mt-10 items-center py-4 gap-y-5">
+          {/* Sidebar Icons */}
+          <GiBullseye className="h-[20px] w-[20px] text-Routecho" />
+          <MdOutlineShoppingBag className="h-[20px] w-[20px] text-Routecho" />
+          <GoMortarBoard className="h-[20px] w-[20px] text-Routecho" />
+          <MdPeople className="h-[20px] w-[20px] text-Routecho" />
+          {/* <MdAssignment className="h-[20px] w-[20px] text-Routecho" />
+          <BsPatchQuestion className="h-[20px] w-[20px] text-Routecho" /> */}
 
-          {/* <MdDescription className="text-2xl mb-4 text-green-700" /> */}
-          <hr />
-          {/* <img src={home} className='h-[20px] w-[20px] mb-4 text-Routecho'  />
-          {/* <img src={plus} className='text-2xl mb-4 text-green-700' /> */}
-          <div className='mt-14'>
-            <img src={inner} className='h-[30px] w-[30px] text-green-700' alt='Inner Image' />
+          {/* Divider */}
+          <hr className="w-full border-t mt-4 border-gray-300" />
+
+          {/* Additional Sidebar Options */}
+          <IoHomeOutline className="h-[20px] w-[20px] text-Routecho mt-4" />
+          <CiCirclePlus className="h-[22px] w-[22px] text-Routecho mt-4" />
+          <HiOutlineCog className="h-[20px] w-[20px] text-Routecho mt-4" />
+
+          {/* Bottom Profile Image */}
+          <div className="mt-auto mb-4">
+            <img
+              src={inner}
+              className="h-[30px] w-[30px] mb-24 rounded-full" // Adjust the size to match your design
+              alt="User Profile"
+            />
           </div>
-          {/* Add more icons as needed */}
         </div>
       )}
 
-
       {/* right panel */}
 
-      <div className={`transition-all duration-300 ${isSidebarOpen ? 'w-full sm:w-[70%]' : 'w-full sm:w-[96%]'}`}>
+      <div className={`transition-all duration-300 mb-0 ${isSidebarOpen ? 'w-full sm:w-[70%]' : 'w-full sm:w-[96%]'}`}>
         {/* Toggle button for sidebar */}
         <div>
           <button
@@ -466,39 +485,87 @@ function HeroSection() {
             className={`absolute top-20 ${isSidebarOpen ? 'left-60' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
             style={{ bottom: '12px' }}
           >
-
             <SidebarIcon className="text-Routecho text-2xl" />
           </button>
 
-
           {/* above filters */}
-          <div className='flex items-center h-[21px] justify-between mx-auto p-8 bg-white border-b'>
-            <div className="flex items-center flex-1 mr-4"> {/* Added mr-4 for gap */}
-              <div className="flex items-center border-inp border-[1px] px-2 rounded-md">
-                <FiSearch className="text-Routecho text-xl mr-2" /> {/* Search icon */}
-                <input
-                  type="text"
-                  className={`search-box placeholder:text-[14px] ${isSidebarOpen ? 'w-[231px]' : 'w-[340px]'} border-[1px] border-inp`}
-                  style={{ height: '41px' }}
-                  placeholder="Candidates with 3+ years experience in MERN Stack"
-                />
-              </div>
-            </div>
+          <div>
 
-            {/* Dropdown buttons */}
-            <div className='flex items-center space-x-4'> {/* This will maintain equal spacing between buttons */}
-              {['Status', 'Degree', 'Hard Skills'].map((label, index) => (
-                <div className='flex' key={index}>
+
+            {/* above filters */}
+            <div className='flex items-center justify-between mx-auto p-4 bg-white border-b'>
+              <div className="flex items-center flex-1 mr-4">
+                <div className="flex items-center border-inp border-[1px] w-full px-2 rounded-md">
+                  <FiSearch className="text-Routecho text-xl mr-2" /> {/* Search icon */}
+                  <input
+                    type="text"
+                    className={`search-box placeholder:text-[14px] ${isSidebarOpen ? 'w-[231px]' : 'w-[340px]'} border-[1px] border-inp`}
+                    style={{ height: '41px' }}
+                    placeholder="Candidates with 3+ years experience in MERN Stack"
+                  />
+                </div>
+              </div>
+
+              {/* Dropdown buttons */}
+              <div className='flex items-center space-x-4'>
+                {/* Status Button */}
+                <div className='flex'>
                   <button
                     className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
-                    onClick={() => toggleDropdown(label)}
+                    onClick={() => toggleDropdown('Status')}
                   >
                     <TbCheckbox className='text-xl' />
-                    {label}
-                    <TbChevronDown className='ml-2 text-xl' />
+                    <span className='ml-2'>Status</span>
+                    <TbChevronDown className='ml-5 text-xl' />
                   </button>
 
-                  {currentDropdown === label && (
+                  {currentDropdown === 'Status' && (
+                    <div className='absolute left-0 mt-7 w-40 bg-white border border-greey rounded-md shadow-lg'>
+                      <ul>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 3</li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                {/* Experience Button - Always render it next to Status when sidebar is closed */}
+                {!isSidebarOpen && (
+                  <div className='flex'>
+                    <button
+                      className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
+                      onClick={() => toggleDropdown('Experience')}
+                    >
+                      <MdOutlineShoppingBag className='text-xl' />
+                      Experience
+                      <TbChevronDown className='ml-2 text-xl' />
+                    </button>
+
+                    {currentDropdown === 'Experience' && (
+                      <div className='absolute left-0 mt-7 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
+                        <ul>
+                          <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
+                          <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
+                          <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 3</li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Degree Button */}
+                <div className='flex'>
+                  <button
+                    className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
+                    onClick={() => toggleDropdown('Degree')}
+                  >
+                    <GoMortarBoard className='text-xl' />
+                    Degree
+                    <TbChevronDown className='ml-5 text-xl' />
+                  </button>
+
+                  {currentDropdown === 'Degree' && (
                     <div className='absolute left-0 mt-7 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
                       <ul>
                         <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
@@ -508,73 +575,96 @@ function HeroSection() {
                     </div>
                   )}
                 </div>
-              ))}
-            </div>
 
-            {/* Avatar */}
-            <div className="relative inline-block text-left ml-3">
-              {/* Avatar group */}
-              <div className="flex -space-x-2" onClick={dropDown}>
-                {users.slice(0, 2).map((user, index) => (
-                  <img
-                    key={index}
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-10 h-10 rounded-full border-2 border-white"
-                  />
-                ))}
-                <div className="w-10 h-10 bg-green-900 text-white text-center rounded-full flex items-center justify-center border-2 border-white">
-                  +{users.length - 2}
+                {/* Hard Skills Button */}
+                <div className='flex'>
+                  <button
+                    className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
+                    onClick={() => toggleDropdown('Hard Skills')}
+                  >
+                    <MdOutlineLeaderboard className='text-xl' />
+                    Hard Skills
+                    <TbChevronDown className='ml-2 text-xl' />
+                  </button>
+
+                  {currentDropdown === 'Hard Skills' && (
+                    <div className='absolute left-0 mt-7 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
+                      <ul>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 3</li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* Dropdown */}
-              {isPop && (
-                <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                  <ul className="py-1">
-                    {users.map((user, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
-                      >
-                        <img
-                          src={user.avatar}
-                          alt={user.name}
-                          className="w-8 h-8 rounded-full mr-3"
-                        />
-                        <span>{user.name}</span>
-                      </li>
-                    ))}
-                  </ul>
+              {/* Avatar */}
+              <div className="relative inline-block text-left ml-3">
+                {/* Avatar group */}
+                <div className="flex -space-x-2" onClick={dropDown}>
+                  {users.slice(0, 2).map((user, index) => (
+                    <img
+                      key={index}
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-10 h-10 rounded-full border-2 border-white"
+                    />
+                  ))}
+                  <div className="w-10 h-10 bg-green-900 text-white text-center rounded-full flex items-center justify-center border-2 border-white">
+                    +{users.length - 2}
+                  </div>
                 </div>
-              )}
+
+                {/* Dropdown */}
+                {isPop && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                    <ul className="py-1">
+                      {users.map((user, index) => (
+                        <li
+                          key={index}
+                          className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
+                        >
+                          <img
+                            src={user.avatar}
+                            alt={user.name}
+                            className="w-8 h-8 rounded-full mr-3"
+                          />
+                          <span>{user.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
         </div>
 
 
+
         {/* main content */}
-        <div className="p-6 overflow-x-auto">
-          <div className="overflow-y-auto w-[1100px] mx-auto h-96">
+        <div className="p-0 overflow-x-auto border-[1px]  ml-4 border-greey">
+          <div className="overflow-y-auto ml-1 w-[1200px] mx-auto h-96">
             <table className="min-w-full bg-white shadow-md">
               <thead>
-                <tr className="bg-gray-200 text-black uppercase text-[13px] leading-normal">
-                  <th className="py-3 px-6 text-left">Name</th>
-                  <th className="py-3 px-6 text-left">Timestamp</th>
+                <tr className="bg-gray-200 text-kala font-Plus Jakarta Sans uppercase text-[13px] leading-normal">
+                  <th className="py-3 px-6 text-left items-center">Name</th>
+                  <th className="py-3 px-6 text-left items-center space-x-1 flex">
+                    <span>Timestamp</span>
+                   
+                  </th>
                   <th className="py-3 px-6 text-center">Score</th>
-                  <th className="py-3 px-6 text-center">Status</th>
+                  <th className="py-3 px-6  text-center">Status</th>
                   <th className="py-3 px-6 text-center">Resume</th>
                   <th className="py-3 px-6 text-center">Notes</th>
-                  {/* <th className="py-3 px-6 text-center whitespace-nowrap">Why should we hire you?</th> */}
-
-
                 </tr>
               </thead>
               <tbody className="text-gray-600 text-sm font-light">
                 {dataState.map((item, index) => (
                   <React.Fragment key={index}>
-                    <tr className=" hover:bg-gray-100">
+                    <tr className="hover:bg-gray-100">
                       <td className="py-3 px-6 text-left whitespace-nowrap border-r-2 border-name">
                         <div className="flex items-center">
                           <input type="checkbox" className="mr-3 bg-inp" />
@@ -590,7 +680,6 @@ function HeroSection() {
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center whitespace-nowrap text-[12px] text-greey">
-                          
                           {item.timestamp}
                         </div>
                       </td>
@@ -598,95 +687,49 @@ function HeroSection() {
                       {/* score */}
                       <td className="py-3 px-6 text-center">
                         <div className="relative flex items-center justify-center">
-                          {/* Donut Chart Icon with score inside */}
-                          <div className="relative ">
-                            <RiDonutChartLine className="text-darkG w-full h-full inline text-2xl" />
+                          <div className="relative">
+                            <RiDonutChartLine className="text-darkG w-full h-full inline text-3xl" />
                             <span className="absolute inset-0 flex items-center justify-center text-greey text-[10px] font-bold">
                               {item.score}
                             </span>
                           </div>
-
                           <AiOutlineDown
                             className="ml-0 cursor-pointer text-xs"
                             onClick={() => togglePopup(index)}
                           />
-
-                          {/* Popup */}
-                          {popupIndex === index && (
-                            <div className="absolute top-full mt-2 left-0 bg-bord p-4 rounded shadow-lg z-10">
-                              <h3 className="font-bold mb-2 text-green-900">Candidate Score Card</h3>
-
-                              {/* Domain Knowledge */}
-                              <div className="flex items-center mb-2 border-1 bg-white border-bord shadow-sm p-1 rounded-md">
-                                <span className="font-medium text-Routecho whitespace-nowrap">
-                                  Domain Knowledge:
-                                </span>
-                                <div className="ml-2 text-yellow-500 flex">
-                                  <FaStar />
-                                  <FaStar />
-                                  <FaStar />
-                                  <FaStar />
-                                  <FaStar />
-                                </div>
-                              </div>
-
-                              {/* Problem Solving */}
-                              <div className="flex items-center mb-2 border-1 border-bord shadow-sm bg-white p-1 rounded-md">
-                                <span className="font-medium text-Routecho whitespace-nowrap">
-                                  Problem Solving:
-                                </span>
-                                <div className="ml-2 text-yellow-500 flex">
-                                  <FaStar />
-                                  <FaStar />
-                                  <FaStar />
-                                  <FaStar />
-                                </div>
-                              </div>
-
-                              {/* Communication */}
-                              <div className="flex items-center mb-2 border-1 border-bord bg-white p-1 shadow-sm rounded-md">
-                                <span className="font-medium text-Routecho">Communication:</span>
-                                <div className="ml-2 text-yellow-500 flex">
-                                  <FaStar />
-                                  <FaStar />
-                                  <FaStar />
-                                </div>
-                              </div>
-                            </div>
-                          )}
                         </div>
                       </td>
 
-
                       {/* status */}
-
                       <td className="py-3 px-6 text-center relative">
                         <div
-                          className={`font-medium cursor-pointer flex items-center justify-center`}
+                          className={`font-medium cursor-pointer flex items-center ml-auto`}
                           onClick={() =>
                             setStatusDropdownIndex(statusDropdownIndex === index ? null : index)
                           }
                           style={{
                             backgroundColor:
                               item.status === 'Shortlisted'
-                                ? '#F0FFF8' // light green for shortlisted
+                                ? '#F0FFF8'
                                 : item.status === 'Waitlisted'
-                                  ? '#FEFFE5' // light yellow for waitlisted
+                                  ? '#FEFFE5'
                                   : item.status === 'Rejected'
-                                    ? '#FFF0F0' // light red for rejected
+                                    ? '#FFF0F0'
                                     : 'transparent',
                             color:
                               item.status === 'Shortlisted'
-                                ? '#28A745' // green text for shortlisted
+                                ? '#28A745'
                                 : item.status === 'Waitlisted'
-                                  ? '#FFC107' // yellow text for waitlisted
+                                  ? '#FFC107'
                                   : item.status === 'Rejected'
-                                    ? '#DC3545' // red text for rejected
+                                    ? '#DC3545'
                                     : 'black',
                             padding: '8px 16px',
                             borderRadius: '12px',
                             border: '1px solid transparent',
-                            width: 'fit-content', // this keeps the button just around the text
+                            width: 'fit-content',
+                            margin: '3px',
+                            
                           }}
                         >
                           {item.status}
@@ -705,7 +748,6 @@ function HeroSection() {
                           />
                         </div>
 
-                        {/* Status Dropdown */}
                         {statusDropdownIndex === index && (
                           <div className="absolute mt-2 w-36 bg-white shadow-lg rounded-md z-50">
                             <div
@@ -723,7 +765,7 @@ function HeroSection() {
                             </div>
                             <hr />
                             <div
-                              className=" hover:bg-gray-100 cursor-pointer font-medium text-red-600 rounded-md"
+                              className="py-2 px-4 hover:bg-gray-100 cursor-pointer font-medium text-red-600 rounded-md"
                               onClick={() => handleStatusChange(index, 'Rejected')}
                             >
                               Rejected
@@ -732,15 +774,13 @@ function HeroSection() {
                         )}
                       </td>
 
-
-
                       {/* resume */}
                       <td className="py-3 px-6 text-center">
                         <label
                           htmlFor="file-upload"
                           className="cursor-pointer inline-flex items-center px-4 py-2 text-Routecho bg-white border border-inp rounded-md shadow-sm text-sm font-medium hover:bg-blue-100"
                         >
-                          <IoDocumentOutline className="w-5 h-5 mr-2" /> {/* Using the IoDocumentOutline icon */}
+                          <IoDocumentOutline className="w-5 h-5 mr-2" />
                           <span className='text-[12px] text-Routecho'> Resume.pdf</span>
                         </label>
                         <input
@@ -751,55 +791,25 @@ function HeroSection() {
                         />
                       </td>
 
-
-
                       {/* Notes */}
                       <td className="py-3 px-6 text-center">
                         <div className="flex justify-center">
-                          {/* Note icon is always visible */}
                           <button
                             className="text-green-700 bg-green-100 rounded-full px-4 py-2 hover:bg-green-200 whitespace-nowrap"
                             onClick={togglePopupNotes}
                           >
-
                             <FiMessageSquare className="text-gray-500" />
                           </button>
-
-                          {/* Popup for viewing the pre-saved note */}
-                          {showPopup && (
-                            <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center">
-                              <div className="relative flex items-start space-x-2 bg-gray-800 text-white p-3 rounded-2xl rounded-bl-sm max-w-sm">
-                                {/* Close button (cross icon) */}
-                                <button
-                                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-                                  onClick={togglePopupNotes}
-                                >
-                                  <FiX size={24} className="text-white bg-red-500 rounded-md p-1" />
-                                </button>
-
-                                {/* Title for note popup */}
-                                <h2 className="font-bold text-lg mb-4">Albert Flores</h2>
-
-                                {/* Display the pre-saved note */}
-                                <div className="p-4 rounded-md">
-                                  {preSavedNote}
-                                </div>
-                              </div>
-                            </div>
-                          )}
                         </div>
                       </td>
-
-                      {/* Why should we hire you */}
-
                     </tr>
                   </React.Fragment>
                 ))}
               </tbody>
-
             </table>
           </div>
         </div>
+
       </div>
     </div>
   );
