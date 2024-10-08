@@ -16,6 +16,7 @@ import { FaStar, FaSortimport, FaSort, FaSortUp, FaSortDown } from "react-icons/
 import { data } from '../data'
 import { TbCheckbox, TbChevronDown } from "react-icons/tb";
 import { MdOutlineLeaderboard } from "react-icons/md";
+import { CiStickyNote } from "react-icons/ci";
 // import sidebar from '../assests/sidebar.svg'
 import { ReactComponent as SidebarIcon } from '../assests/SidebarIcon.svg';
 // import plus from '../assests/PLUS.png'
@@ -33,11 +34,23 @@ import { BiHide } from "react-icons/bi";
 import { FaHome, FaPlus, FaCog } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 import { HiOutlineCog } from "react-icons/hi";
+import bullie from '../assests/bullseye-with-arrow.png'
+import { IoIosClose } from "react-icons/io";
+import { PiSealQuestionThin } from "react-icons/pi";
+import avat from '../assests/ellipse1i110-a7qfo-200h.png'
+import { FaLinkedin } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
+import { FaPhone } from "react-icons/fa6";
 
 function HeroSection(key) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isOpenWE, setIsOpenWE] = useState(false);
   const [sortConfig, setSortConfig] = useState({ key: '', direction: 'asc' });
+  const [value, setValue] = useState(0); // Initial value of the slider
+
+  const handleChange = (e) => {
+    setValue(e.target.value); // Update the value on change
+  };
 
   const [isOpenEQ, setIsOpenEQ] = useState(false);
   const [isOpenSS, setIsOpenSS] = useState(false);
@@ -56,6 +69,27 @@ function HeroSection(key) {
   const [isPop, setIsPop] = useState(false);
   const [isOAOpen, setIsOAOpen] = useState(false);
   const [accuracy, setAccuracy] = useState(50); // Default value
+  const [showNotePopup, setShowNotePopup] = useState(false);
+  // const [showFullButton, setShowFullButton] = useState(false); // State to toggle button view
+  const [note, setNote] = useState(''); // State to store the note content
+  const [isEditing, setIsEditing] = useState(false); // State to determine if note is being edited
+  const [currentCandidateIndex, setCurrentCandidateIndex] = useState(null);
+
+  // const toggleButtonView = () => {
+  //   setShowFullButton(!showFullButton);
+  // };
+
+  const handleNoteChange = (e) => {
+    setNote(e.target.value); // Update note state when input changes
+  };
+
+  const saveNote = () => {
+    setIsEditing(false); // Save note and stop editing mode
+  };
+
+  const togglePopupNotesO = () => {
+    setShowNotePopup(!showNotePopup);
+  };
 
   // State for individual question toggles
   const [isQuestionOpen, setIsQuestionOpen] = useState({
@@ -65,7 +99,12 @@ function HeroSection(key) {
     excite: false,
   });
 
-  
+  const [showFullButton, setShowFullButton] = useState(false);
+
+  // Function to toggle between the icon and full button
+  const toggleButtonView = () => {
+    setShowFullButton(!showFullButton);
+  };
 
   const toggleDropdownOA = () => {
     setIsOAOpen(!isOAOpen);
@@ -175,14 +214,15 @@ function HeroSection(key) {
 
       {/* Sidebar */}
       {isSidebarOpen && (
-        <div className="w-[23%] min-h-screen border-inp  border-[1px] rounded-md">
+        <div className="w-[24%] min-h-screen border-inp  border-[1px] rounded-md">
           <div className="p-3 w-full bg-white ">
             {/* Spikes Section */}
             <div className='mb-4'>
-              <div className='flex items-center'>
-                <GiBullseye className='text-lg text-green-700' />
-                <h2 className='text-[16px] font-md text-Routecho ml-2'>Spikes</h2>
-                <GoQuestion className='text-lg text-green-800 ml-1' />
+              <div className='flex items-center text-Routecho'>
+
+                <img src={bullie} className='w-[20px] h-[20px] text-Routecho' />
+                <h2 className='text-[16px] font-semibold w-[90px] h-[25px] text-[#004838] ml-2'>Spikes</h2>
+                <GoQuestion className='text-xl font-semibold text-[#004838] -ml-9' />
               </div>
               <div className='relative'>
                 <input
@@ -196,12 +236,15 @@ function HeroSection(key) {
 
               <div className='mt-4 flex gap-x-7'>
                 <label className='flex items-center text-green-700 text-[14px] bg-bord rounded-md p-1 pl-2 pr-2'>
-                  <input type='checkbox' className='mr-2 text-green-700 ' />
+                  <input type='checkbox' className='mr-2 text-green-700' />
                   B-Tech
+                  <IoIosClose className='w-[18px] h-[18px] text-Routecho ml-1' />
                 </label>
                 <label className='flex items-center text-green-700 text-[14px] bg-bord rounded-md p-1 pl-2 pr-2'>
                   <input type='checkbox' className='mr-2 text-green-700' />
                   3-4 Yrs
+                  <IoIosClose className='w-[18px] h-[18px] text-Routecho ml-1' />
+
                 </label>
               </div>
             </div>
@@ -241,21 +284,83 @@ function HeroSection(key) {
                 <span>{isOpenWE ? <MdOutlineArrowDropUp className='text-lg text-green-700' /> : <MdOutlineArrowDropDown className='text-lg text-green-700' />}</span>
               </div>
               {isOpenWE && (
-                <div className='mt-2'>
+                <div className='mt-4'>
                   <div className='mb-4'>
+
+                    <div className='flex justify-between items-center'>
+                      <p className='text-green-600'>Range (In Years)</p>
+                      <div className='flex items-center space-x-2'>
+                        <p className='text-[10px] text-Routecho'>MUST HAVE</p>
+                        <input type='checkbox' className='mr-2 text-green-700' />
+                      </div>
+                    </div>
+                    {/* <input type='range' min='0' max='20' className='w-full mt-2 text-green-700' />
+                     */}
+                    <div>
+                      <input
+                        type="range"
+                        min="0"
+                        max="20"
+                        value={value} // Set the value to the state variable
+                        onChange={handleChange} // Handle change events
+                        className="w-full mt-2"
+                        style={{
+                          appearance: 'none',
+                          width: '100%',
+                          height: '8px',
+                          background: 'linear-gradient(to right, #004838 ' + (value / 20) * 100 + '%, #e0e0e0 ' + (value / 20) * 100 + '%) no-repeat', // Dark green track based on value
+                          borderRadius: '5px',
+                          outline: 'green',
+                          padding: '0',
+                          cursor: 'pointer',
+                        }}
+                      />
+                      <div className="mt-2">Years: {value}</div> {/* Display the current value */}
+                    </div>
+
+
                     <div className='flex justify-between'>
+
                       <span>0 Yrs</span>
                       <span>20 Yrs</span>
                     </div>
-                    <input type='range' min='0' max='20' className='w-full mt-2 text-green-700' />
+                    <div className='flex justify-between items-center mt-5'>
+                      <p className='text-green-600'>Job Role</p>
+                      <div className='flex items-center space-x-2'>
+                        <p className='text-[10px] text-Routecho'>MUST HAVE</p>
+                        <input type='checkbox' className='mr-2 text-green-700' />
+                      </div>
+                    </div>
+
                     <input
                       type='text'
-                      placeholder='Job Role'
+                      placeholder='Product Manager'
+                      className='mt-2 p-2 w-full border border-gray-300 rounded-md'
+                    />
+
+                    <div className='flex justify-between items-center mt-5'>
+                      <p className='text-green-600'>Company Name</p>
+                      <div className='flex items-center space-x-2'>
+                        <p className='text-[10px] text-Routecho'>MUST HAVE</p>
+                        <input type='checkbox' className='mr-2 text-green-700' />
+                      </div>
+                    </div>
+
+                    <input
+                      type='text'
+                      placeholder='Goldman Sachs'
                       className='mt-2 p-2 w-full border border-gray-300 rounded-md'
                     />
                   </div>
                   <div className='mb-4'>
-                    <h2 className='text-lg font-md text-green-700'>Company Tier</h2>
+                    <div className='flex justify-between items-center mt-5'>
+                      <p className='text-green-600'>Company Name</p>
+                      <div className='flex items-center space-x-2'>
+                        <p className='text-[10px] text-Routecho'>MUST HAVE</p>
+                        <input type='checkbox' className='mr-2 text-green-700' />
+                      </div>
+
+                    </div>
                     <label className='flex items-center'>
                       <input type='radio' name='tier' className='mr-2' /> Tier 1
                     </label>
@@ -447,12 +552,16 @@ function HeroSection(key) {
       {/* Icon panel (for the 10% width) */}
       {/* Closed Sidebar */}
       {!isSidebarOpen && (
-        <div className="w-[6%] hidden sm:flex min-h-screen bg-gray-100 flex-col mt-10 items-center py-4 gap-y-5">
+        <div className="w-[5%] hidden sm:flex min-h-screen  flex-col mt-16 shadow-lg items-center py-4 gap-y-7"
+         style={{   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)'}}
+         >
           {/* Sidebar Icons */}
           <GiBullseye className="h-[20px] w-[20px] text-Routecho" />
           <MdOutlineShoppingBag className="h-[20px] w-[20px] text-Routecho" />
           <GoMortarBoard className="h-[20px] w-[20px] text-Routecho" />
           <MdPeople className="h-[20px] w-[20px] text-Routecho" />
+          <MdOutlineLeaderboard className="h-[20px] w-[20px] text-Routecho" />
+          <PiSealQuestionThin className="h-[25px] w-[25px] text-Routecho" />
           {/* <MdAssignment className="h-[20px] w-[20px] text-Routecho" />
           <BsPatchQuestion className="h-[20px] w-[20px] text-Routecho" /> */}
 
@@ -476,51 +585,48 @@ function HeroSection(key) {
       )}
 
       {/* right panel */}
-
-      <div className={`transition-all duration-300 mb-0 ${isSidebarOpen ? 'w-full sm:w-[70%]' : 'w-full sm:w-[96%]'}`}>
+      <div className={`transition-all duration-300  mb-0 ${isSidebarOpen ? 'w-full -ml-2 sm:w-[80%]' : 'w-full sm:w-[94%]'}`}>
         {/* Toggle button for sidebar */}
         <div>
           <button
             onClick={toggleSidebar}
-            className={`absolute top-20 ${isSidebarOpen ? 'left-60' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
+            className={`absolute top-20 ${isSidebarOpen ? 'left-52' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
             style={{ bottom: '12px' }}
           >
             <SidebarIcon className="text-Routecho text-2xl" />
           </button>
 
           {/* above filters */}
-          <div>
-
-
-            {/* above filters */}
-            <div className='flex items-center justify-between mx-auto p-4 bg-white border-b'>
-              <div className="flex items-center flex-1 mr-4">
-                <div className="flex items-center border-inp border-[1px] w-full px-2 rounded-md">
+          <div className='space-x-4 ml-5'>
+            <div className='flex items-center justify-between mx-auto p-4'>
+              {/* Search Input */}
+              <div className="flex items-center flex-1 mr-4 space-x-4"> {/* Added space-x-4 */}
+                <div className="flex items-center border-2 rounded-md px-2">
                   <FiSearch className="text-Routecho text-xl mr-2" /> {/* Search icon */}
                   <input
                     type="text"
-                    className={`search-box placeholder:text-[14px] ${isSidebarOpen ? 'w-[231px]' : 'w-[340px]'} border-[1px] border-inp`}
+                    className={`search-box ${isSidebarOpen ? 'w-[231px]' : 'w-[440px]'}`}
                     style={{ height: '41px' }}
                     placeholder="Candidates with 3+ years experience in MERN Stack"
                   />
                 </div>
               </div>
 
-              {/* Dropdown buttons */}
-              <div className='flex items-center space-x-4'>
+              {/* Dropdown Buttons */}
+              <div className='flex items-center space-x-5'> {/* Kept space-x-4 for uniform spacing */}
                 {/* Status Button */}
-                <div className='flex'>
+                <div className='relative'>
                   <button
-                    className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
+                    className='flex items-center w-[170px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
                     onClick={() => toggleDropdown('Status')}
                   >
                     <TbCheckbox className='text-xl' />
                     <span className='ml-2'>Status</span>
-                    <TbChevronDown className='ml-5 text-xl' />
+                    <TbChevronDown className='ml-11 text-xl' />
                   </button>
 
                   {currentDropdown === 'Status' && (
-                    <div className='absolute left-0 mt-7 w-40 bg-white border border-greey rounded-md shadow-lg'>
+                    <div className='absolute z-50 mt-1 w-full bg-white border border-greey rounded-md shadow-lg'>
                       <ul>
                         <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
                         <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
@@ -530,43 +636,41 @@ function HeroSection(key) {
                   )}
                 </div>
 
-                {/* Experience Button - Always render it next to Status when sidebar is closed */}
-                {!isSidebarOpen && (
-                  <div className='flex'>
-                    <button
-                      className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
-                      onClick={() => toggleDropdown('Experience')}
-                    >
-                      <MdOutlineShoppingBag className='text-xl' />
-                      Experience
-                      <TbChevronDown className='ml-2 text-xl' />
-                    </button>
+                {/* Experience Button */}
+                <div className='relative'>
+                  <button
+                    className='flex items-center w-[170px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
+                    onClick={() => toggleDropdown('Experience')}
+                  >
+                    <MdOutlineShoppingBag className='text-xl' />
+                    Experience
+                    <TbChevronDown className='ml-11 text-2xl' />
+                  </button>
 
-                    {currentDropdown === 'Experience' && (
-                      <div className='absolute left-0 mt-7 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
-                        <ul>
-                          <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
-                          <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
-                          <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 3</li>
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                )}
+                  {currentDropdown === 'Experience' && (
+                    <div className='absolute z-50 mt-1 w-full bg-white border border-greey rounded-md shadow-lg'>
+                      <ul>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
+                        <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 3</li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
 
                 {/* Degree Button */}
-                <div className='flex'>
+                <div className='relative'>
                   <button
-                    className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
+                    className='flex items-center w-[164px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
                     onClick={() => toggleDropdown('Degree')}
                   >
                     <GoMortarBoard className='text-xl' />
                     Degree
-                    <TbChevronDown className='ml-5 text-xl' />
+                    <TbChevronDown className='ml-11 text-xl' />
                   </button>
 
                   {currentDropdown === 'Degree' && (
-                    <div className='absolute left-0 mt-7 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
+                    <div className='absolute z-50 left-0 mt-1 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
                       <ul>
                         <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
                         <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
@@ -577,18 +681,18 @@ function HeroSection(key) {
                 </div>
 
                 {/* Hard Skills Button */}
-                <div className='flex'>
+                <div className='relative'>
                   <button
-                    className='flex items-center w-[140px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
+                    className='flex items-center w-[170px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md'
                     onClick={() => toggleDropdown('Hard Skills')}
                   >
                     <MdOutlineLeaderboard className='text-xl' />
                     Hard Skills
-                    <TbChevronDown className='ml-2 text-xl' />
+                    <TbChevronDown className='ml-7 text-xl' />
                   </button>
 
                   {currentDropdown === 'Hard Skills' && (
-                    <div className='absolute left-0 mt-7 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
+                    <div className='absolute z-50 left-0 mt-1 w-40 bg-white border border-gray-300 rounded-md shadow-lg'>
                       <ul>
                         <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 1</li>
                         <li className='px-4 py-2 hover:bg-gray-200 cursor-pointer'>Option 2</li>
@@ -598,88 +702,389 @@ function HeroSection(key) {
                   )}
                 </div>
               </div>
-
-              {/* Avatar */}
-              <div className="relative inline-block text-left ml-3">
-                {/* Avatar group */}
-                <div className="flex -space-x-2" onClick={dropDown}>
-                  {users.slice(0, 2).map((user, index) => (
-                    <img
-                      key={index}
-                      src={user.avatar}
-                      alt={user.name}
-                      className="w-10 h-10 rounded-full border-2 border-white"
-                    />
-                  ))}
-                  <div className="w-10 h-10 bg-green-900 text-white text-center rounded-full flex items-center justify-center border-2 border-white">
-                    +{users.length - 2}
-                  </div>
-                </div>
-
-                {/* Dropdown */}
-                {isPop && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                    <ul className="py-1">
-                      {users.map((user, index) => (
-                        <li
-                          key={index}
-                          className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
-                        >
-                          <img
-                            src={user.avatar}
-                            alt={user.name}
-                            className="w-8 h-8 rounded-full mr-3"
-                          />
-                          <span>{user.name}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
+
 
         </div>
 
 
 
         {/* main content */}
-        <div className="p-0 overflow-x-auto border-[1px]  ml-4 border-greey">
-          <div className="overflow-y-auto ml-1 w-[1200px] mx-auto h-96">
-            <table className="min-w-full bg-white shadow-md">
+        <div className="p-0 border-name ml-5">
+          <div className="ml-5 w-full mx-auto min-h-96">
+            <table className="min-w-full bg-white border-name border-2 rounded-lg shadow-md">
               <thead>
-                <tr className="bg-gray-200 text-kala font-Plus Jakarta Sans uppercase text-[13px] leading-normal">
-                  <th className="py-3 px-6 text-left items-center">Name</th>
-                  <th className="py-3 px-6 text-left items-center space-x-1 flex">
-                    <span>Timestamp</span>
-                   
+                <tr className="bg-[#F5F6F3] text-kala font-[600px] h-[56px] Jakarta Sans uppercase text-[13px] leading-normal">
+                  <th className="py-3 px-6 text-center">
+                    <div className="flex items-center justify-start">
+                      <input type="checkbox" className="mr-2 bg-inp" />
+                      <span className="ml-2">Name</span>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="inline-block ml-1"
+                      >
+                        <path
+                          d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
+                          fill="#D8D3D3"
+                        />
+                        <path
+                          d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
+                          fill="#D8D3D3"
+                        />
+                      </svg>
+                    </div>
                   </th>
-                  <th className="py-3 px-6 text-center">Score</th>
-                  <th className="py-3 px-6  text-center">Status</th>
-                  <th className="py-3 px-6 text-center">Resume</th>
-                  <th className="py-3 px-6 text-center">Notes</th>
+
+                  <th className="py-3 px-6 text-center whitespace-normal">
+                    <span>Timestamp</span>
+
+                 
+
+
+                    {/* Second SVG */}
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1 whitespace-normal"
+                    >
+                      <g clipPath="url(#clip0_1_9784)">
+                        <path
+                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
+                          stroke="#828282"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1_9784">
+                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+
+                    {/* Third SVG */}
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
+                        fill="#828282"
+                      />
+                    </svg>
+
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
+                        fill="#D8D3D3"
+                      />
+                      <path
+                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
+                        fill="#D8D3D3"
+                      />
+                    </svg>
+
+                  </th>
+
+
+
+
+                  <th className="py-3 px-6 text-center">
+                    <span>Score</span>
+
+                    {/* First SVG */}
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
+                        fill="#D8D3D3"
+                      />
+                      <path
+                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
+                        fill="#D8D3D3"
+                      />
+                    </svg>
+
+                    {/* Second SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <g clipPath="url(#clip0_1_9784)">
+                        <path
+                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
+                          stroke="#828282"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1_9784">
+                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                    {/* Third SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
+                        fill="#828282"
+                      />
+                    </svg>
+
+                  </th>
+
+                  <th className="py-3 px-6 text-center">
+                    <span>Status</span>
+
+                    {/* First SVG */}
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
+                        fill="#D8D3D3"
+                      />
+                      <path
+                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
+                        fill="#D8D3D3"
+                      />
+                    </svg>
+
+                    {/* Second SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <g clipPath="url(#clip0_1_9784)">
+                        <path
+                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
+                          stroke="#828282"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1_9784">
+                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                    {/* Third SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
+                        fill="#828282"
+                      />
+                    </svg>
+
+                  </th>
+
+                  <th className="py-3 px-6 text-center">
+                    <span>Resume</span>
+
+                    {/* First SVG */}
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
+                        fill="#D8D3D3"
+                      />
+                      <path
+                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
+                        fill="#D8D3D3"
+                      />
+                    </svg>
+
+                    {/* Second SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <g clipPath="url(#clip0_1_9784)">
+                        <path
+                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
+                          stroke="#828282"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1_9784">
+                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                    {/* Third SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
+                        fill="#828282"
+                      />
+                    </svg>
+
+                  </th>
+
+                  <th className="py-3 px-6 text-center">
+                    <span>Notes</span>
+
+                    {/* First SVG */}
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
+                        fill="#D8D3D3"
+                      />
+                      <path
+                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
+                        fill="#D8D3D3"
+                      />
+                    </svg>
+
+                    {/* Second SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <g clipPath="url(#clip0_1_9784)">
+                        <path
+                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
+                          stroke="#828282"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1_9784">
+                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                    {/* Third SVG */}
+                    <svg
+                      width="19"
+                      height="18"
+                      viewBox="0 0 19 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="inline-block ml-1"
+                    >
+                      <path
+                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
+                        fill="#828282"
+                      />
+                    </svg>
+
+                  </th>
+
                 </tr>
+
               </thead>
-              <tbody className="text-gray-600 text-sm font-light">
+              <tbody className="text-gray-600 text-sm font-light border-b border-[1px] border-name">
                 {dataState.map((item, index) => (
                   <React.Fragment key={index}>
-                    <tr className="hover:bg-gray-100">
-                      <td className="py-3 px-6 text-left whitespace-nowrap border-r-2 border-name">
+                    <tr className="hover:bg-gray-100 border-b border-[1px] border-name">
+                      <td className="px-3 text-left whitespace-nowrap border-r-2  border-name">
                         <div className="flex items-center">
                           <input type="checkbox" className="mr-3 bg-inp" />
                           <div className="flex flex-col">
                             <span className="font-medium">{item.name}</span>
-                            <div className="flex text-gray-500 space-x-2 text-xs">
-                              <FiPhone />
-                              <FiMail />
-                              <TfiLinkedin />
+                            <div className="flex text-gray-400 mt-1 space-x-2 text-sm">
+                              <FaLinkedin />
+                              <IoMdMail />
+                              <FaPhone />
+
                             </div>
                           </div>
                         </div>
                       </td>
+
                       <td className="py-3 px-6 text-left">
-                        <div className="flex items-center whitespace-nowrap text-[12px] text-greey">
+                        <div className="flex items-center whitespace-nowrap text-[13px] text-greey">
                           {item.timestamp}
                         </div>
                       </td>
@@ -727,9 +1132,10 @@ function HeroSection(key) {
                             padding: '8px 16px',
                             borderRadius: '12px',
                             border: '1px solid transparent',
-                            width: 'fit-content',
+                            width: '100px',
+                            height: '31px',
                             margin: '3px',
-                            
+
                           }}
                         >
                           {item.status}
@@ -778,9 +1184,10 @@ function HeroSection(key) {
                       <td className="py-3 px-6 text-center">
                         <label
                           htmlFor="file-upload"
-                          className="cursor-pointer inline-flex items-center px-4 py-2 text-Routecho bg-white border border-inp rounded-md shadow-sm text-sm font-medium hover:bg-blue-100"
+                          className="cursor-pointer inline-flex items-center px-2 py-2 text-Routecho bg-white border border-inp rounded-lg
+                           shadow-sm text-sm font-medium hover:bg-blue-100"
                         >
-                          <IoDocumentOutline className="w-5 h-5 mr-2" />
+                          <IoDocumentOutline className="w-[18px] h-[18px] mr-2" />
                           <span className='text-[12px] text-Routecho'> Resume.pdf</span>
                         </label>
                         <input
@@ -792,14 +1199,47 @@ function HeroSection(key) {
                       </td>
 
                       {/* Notes */}
+
                       <td className="py-3 px-6 text-center">
                         <div className="flex justify-center">
-                          <button
-                            className="text-green-700 bg-green-100 rounded-full px-4 py-2 hover:bg-green-200 whitespace-nowrap"
-                            onClick={togglePopupNotes}
-                          >
-                            <FiMessageSquare className="text-gray-500" />
-                          </button>
+                          {/* If showFullButton is false, show the FiMessageSquare icon */}
+                          {!showFullButton ? (
+                            <button
+
+                              onClick={() => {
+                                setCurrentCandidateIndex(index);
+                                togglePopupNotes()
+                              }}
+                              className="text-gray-500 hover:bg-gray-200 p-2 rounded-full flex justify-center items-center mt-4"
+                            >
+                              <CiStickyNote className="w-6 h-6 rounded-full text-lg inline-block items-center mr-2" />
+                            </button>
+                          ) : (
+                            // If showFullButton is true, show the full button
+                            <button
+                              className="text-white font-medium mr-2 bg-Routecho rounded-3xl mt-4 px-4 py-2 w-[135px] h-[28px] flex items-center"
+                              onClick={toggleButtonView}
+                              style={{
+                                borderTopLeftRadius: '9999px',
+                                borderBottomLeftRadius: '0',
+                                borderTopRightRadius: '9999px',
+                                borderBottomRightRadius: '9999px',
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.5)',
+                              }}
+                            >
+                              {/* Profile Image */}
+                              <img
+                                src={avat}
+                                alt="Profile"
+                                className="w-5 h-5 rounded-full inline-block -ml-2 mr-2"
+                                style={{ verticalAlign: 'middle' }}
+                              />
+                              {/* Button Text */}
+                              <span className="inline-block text-[13px] whitespace-nowrap" style={{ verticalAlign: 'middle' }}>
+                                Check the note
+                              </span>
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -807,9 +1247,34 @@ function HeroSection(key) {
                 ))}
               </tbody>
             </table>
+            {/* Note Popup */}
+            {showNotePopup && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <h2 className="text-lg font-semibold">Candidate's Note</h2>
+                  <textarea
+                    className="border rounded-md p-2 w-full"
+                    value={noteContent}
+                    onChange={handleNoteChange}
+                    placeholder="Add your note here..."
+                  />
+                  <button
+                    className="mt-4 text-green-500"
+                    onClick={saveNote}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="mt-4 ml-2 text-red-500"
+                    onClick={togglePopupNotes}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-
       </div>
     </div>
   );
