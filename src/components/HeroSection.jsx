@@ -34,13 +34,14 @@ import { BiHide } from "react-icons/bi";
 import { FaHome, FaPlus, FaCog } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 import { HiOutlineCog } from "react-icons/hi";
-import bullie from '../assests/bullseye-with-arrow.png'
+import bullie from '../assests/bulleye.png'
 import { IoIosClose } from "react-icons/io";
 import { PiSealQuestionThin } from "react-icons/pi";
-import avat from '../assests/ellipse1i110-a7qfo-200h.png'
+import avat from '../assests/Ellipse 3.png'
 import { FaLinkedin } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6";
+import { theadData } from './svgdata';
 
 function HeroSection(key) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -74,6 +75,8 @@ function HeroSection(key) {
   const [note, setNote] = useState(''); // State to store the note content
   const [isEditing, setIsEditing] = useState(false); // State to determine if note is being edited
   const [currentCandidateIndex, setCurrentCandidateIndex] = useState(null);
+
+  const [activeItemId, setActiveItemId] = useState(null);
 
   // const toggleButtonView = () => {
   //   setShowFullButton(!showFullButton);
@@ -740,326 +743,16 @@ function HeroSection(key) {
                     </div>
                   </th>
 
-                  <th className="py-3 px-6 text-center whitespace-normal">
-                    <span>Timestamp</span>
-
-                 
-
-
-                    {/* Second SVG */}
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1 whitespace-normal"
-                    >
-                      <g clipPath="url(#clip0_1_9784)">
-                        <path
-                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
-                          stroke="#828282"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_1_9784">
-                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-
-
-                    {/* Third SVG */}
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
-                        fill="#828282"
-                      />
-                    </svg>
-
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
-                        fill="#D8D3D3"
-                      />
-                      <path
-                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
-                        fill="#D8D3D3"
-                      />
-                    </svg>
-
-                  </th>
-
-
-
-
-                  <th className="py-3 px-6 text-center">
-                    <span>Score</span>
-
-                    {/* First SVG */}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
-                        fill="#D8D3D3"
-                      />
-                      <path
-                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
-                        fill="#D8D3D3"
-                      />
-                    </svg>
-
-                    {/* Second SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <g clipPath="url(#clip0_1_9784)">
-                        <path
-                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
-                          stroke="#828282"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_1_9784">
-                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-
-                    {/* Third SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
-                        fill="#828282"
-                      />
-                    </svg>
-
-                  </th>
-
-                  <th className="py-3 px-6 text-center">
-                    <span>Status</span>
-
-                    {/* First SVG */}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
-                        fill="#D8D3D3"
-                      />
-                      <path
-                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
-                        fill="#D8D3D3"
-                      />
-                    </svg>
-
-                    {/* Second SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <g clipPath="url(#clip0_1_9784)">
-                        <path
-                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
-                          stroke="#828282"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_1_9784">
-                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-
-                    {/* Third SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
-                        fill="#828282"
-                      />
-                    </svg>
-
-                  </th>
-
-                  <th className="py-3 px-6 text-center">
-                    <span>Resume</span>
-
-                    {/* First SVG */}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
-                        fill="#D8D3D3"
-                      />
-                      <path
-                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
-                        fill="#D8D3D3"
-                      />
-                    </svg>
-
-                    {/* Second SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <g clipPath="url(#clip0_1_9784)">
-                        <path
-                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
-                          stroke="#828282"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_1_9784">
-                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-
-                    {/* Third SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
-                        fill="#828282"
-                      />
-                    </svg>
-
-                  </th>
-
-                  <th className="py-3 px-6 text-center">
-                    <span>Notes</span>
-
-                    {/* First SVG */}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M12.4096 20.4148C12.2106 20.6992 11.7894 20.6992 11.5904 20.4148L7.30071 14.2867C7.06874 13.9553 7.30582 13.5 7.71033 13.5H16.2897C16.6942 13.5 16.9313 13.9553 16.6993 14.2867L12.4096 20.4148Z"
-                        fill="#D8D3D3"
-                      />
-                      <path
-                        d="M12.4096 3.58517C12.2106 3.30081 11.7894 3.30081 11.5904 3.58517L7.30071 9.71327C7.06874 10.0447 7.30582 10.5 7.71033 10.5H16.2897C16.6942 10.5 16.9313 10.0447 16.6993 9.71327L12.4096 3.58517Z"
-                        fill="#D8D3D3"
-                      />
-                    </svg>
-
-                    {/* Second SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <g clipPath="url(#clip0_1_9784)">
-                        <path
-                          d="M6.45246 0L9.02389 2.57143M9.02389 2.57143L11.5953 0M9.02389 2.57143V14.1429M0.666748 10.9286L3.23818 8.35714M3.23818 8.35714L0.666748 5.78571M3.23818 8.35714H14.8096M11.5953 16.7143L9.02389 14.1429M9.02389 14.1429L6.45246 16.7143M17.381 5.78571L14.8096 8.35714M14.8096 8.35714L17.381 10.9286M4.52389 3.85714L6.45246 5.78571M6.45246 10.9286L4.52389 12.8571M13.5239 3.85714L11.5953 5.78571M11.5953 10.9286L13.5239 12.8571"
-                          stroke="#828282"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_1_9784">
-                          <rect width="18" height="18" fill="white" transform="translate(0.666748)" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-
-                    {/* Third SVG */}
-                    <svg
-                      width="19"
-                      height="18"
-                      viewBox="0 0 19 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="inline-block ml-1"
-                    >
-                      <path
-                        d="M2.16675 3.9525L3.12675 3L15.6667 15.54L14.7142 16.5L12.4042 14.19C11.5417 14.475 10.6267 14.625 9.66675 14.625C5.91675 14.625 2.71425 12.2925 1.41675 9C1.93425 7.68 2.75925 6.5175 3.80925 5.595L2.16675 3.9525ZM9.66675 6.75C10.2635 6.75 10.8358 6.98705 11.2577 7.40901C11.6797 7.83097 11.9167 8.40326 11.9167 9C11.9171 9.25542 11.874 9.50905 11.7892 9.75L8.91675 6.8775C9.1577 6.79274 9.41132 6.74962 9.66675 6.75ZM9.66675 3.375C13.4167 3.375 16.6192 5.7075 17.9167 9C17.3043 10.5547 16.2642 11.9042 14.9167 12.8925L13.8517 11.82C14.889 11.1026 15.7255 10.1318 16.2817 9C15.6755 7.7624 14.7342 6.71972 13.5648 5.99051C12.3954 5.26131 11.0449 4.87482 9.66675 4.875C8.84925 4.875 8.04675 5.01 7.29675 5.25L6.14175 4.1025C7.22175 3.6375 8.41425 3.375 9.66675 3.375ZM3.05175 9C3.65801 10.2376 4.59934 11.2803 5.76872 12.0095C6.93811 12.7387 8.28863 13.1252 9.66675 13.125C10.1842 13.125 10.6942 13.0725 11.1667 12.9675L9.45675 11.25C8.93487 11.1941 8.44787 10.9612 8.07673 10.59C7.70559 10.2189 7.47269 9.73188 7.41675 9.21L4.86675 6.6525C4.12425 7.29 3.50175 8.085 3.05175 9Z"
-                        fill="#828282"
-                      />
-                    </svg>
-
-                  </th>
+                  {
+                    theadData.map((data) => (
+                      <th className='py-3 px-6 text-center'>
+                        <span>{data.name}</span>
+                        {data.svg[0]}
+                        {data.svg[1]}
+                        {data.svg[2]}
+                      </th>
+                    ))
+                  }
 
                 </tr>
 
@@ -1203,13 +896,12 @@ function HeroSection(key) {
                       <td className="py-3 px-6 text-center">
                         <div className="flex justify-center">
                           {/* If showFullButton is false, show the FiMessageSquare icon */}
-                          {!showFullButton ? (
+                          {activeItemId !== item.id ? (
                             <button
+                            onClick={() => (
+                              setActiveItemId(item.id)
 
-                              onClick={() => {
-                                setCurrentCandidateIndex(index);
-                                togglePopupNotes()
-                              }}
+                            )}
                               className="text-gray-500 hover:bg-gray-200 p-2 rounded-full flex justify-center items-center mt-4"
                             >
                               <CiStickyNote className="w-6 h-6 rounded-full text-lg inline-block items-center mr-2" />
@@ -1218,7 +910,7 @@ function HeroSection(key) {
                             // If showFullButton is true, show the full button
                             <button
                               className="text-white font-medium mr-2 bg-Routecho rounded-3xl mt-4 px-4 py-2 w-[135px] h-[28px] flex items-center"
-                              onClick={toggleButtonView}
+                              onClick={() => setShowNotePopup(true)}
                               style={{
                                 borderTopLeftRadius: '9999px',
                                 borderBottomLeftRadius: '0',
@@ -1255,7 +947,7 @@ function HeroSection(key) {
                   <textarea
                     className="border rounded-md p-2 w-full"
                     value={noteContent}
-                    onChange={handleNoteChange}
+                    onChange={(e) => setNoteContent(e.target.value)}
                     placeholder="Add your note here..."
                   />
                   <button
@@ -1266,7 +958,9 @@ function HeroSection(key) {
                   </button>
                   <button
                     className="mt-4 ml-2 text-red-500"
-                    onClick={togglePopupNotes}
+                    onClick={() => (
+                      setShowNotePopup((prevState) => !prevState)
+                    )}
                   >
                     Close
                   </button>

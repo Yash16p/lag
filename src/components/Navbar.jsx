@@ -14,13 +14,13 @@ const Navbar = () => {
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-2 flex flex-wrap justify-between items-center">
         {/* Left section: Logo and Title */}
-        <div className="flex items-center space-x-2 sm:space-x-4"> {/* Adjusted space for small and larger screens */}
+        <div className="relative -left-10 flex items-center space-x-2 sm:space-x-4"> {/* Adjusted space for small and larger screens */}
           {/* Logo */}
           <img src={Logo} alt="Logo" className="h-8" />
           
           {/* Title */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
-            <span className="font-bold text-lg sm:text-xl text-green-800">Lagoon</span>
+            <span className=" font-bold text-lg sm:text-xl text-green-800">Lagoon</span>
             <span className='font-semibold text-base sm:text-lg'>Untitled file</span>
           </div>
         </div>
