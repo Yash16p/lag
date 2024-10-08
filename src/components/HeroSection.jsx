@@ -37,7 +37,7 @@ import { HiOutlineCog } from "react-icons/hi";
 import bullie from '../assests/bulleye.png'
 import { IoIosClose } from "react-icons/io";
 import { PiSealQuestionThin } from "react-icons/pi";
-import avat from '../assests/Ellipse 3.png'
+import avat from '../assests/face.png'
 import { FaLinkedin } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6";
@@ -556,10 +556,11 @@ function HeroSection(key) {
       {/* Closed Sidebar */}
       {!isSidebarOpen && (
         <div className="w-[5%] hidden sm:flex min-h-screen  flex-col mt-16 shadow-lg items-center py-4 gap-y-7"
-         style={{   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)'}}
-         >
+          style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)' }}
+        >
           {/* Sidebar Icons */}
-          <GiBullseye className="h-[20px] w-[20px] text-Routecho" />
+          {/* <GiBullseye className="h-[20px] w-[20px] text-Routecho" />*/}
+          <img src={bullie} className='w-[25px] h-[25px] text-green-950 rounded-full bg-[#EEF2FF]' />
           <MdOutlineShoppingBag className="h-[20px] w-[20px] text-Routecho" />
           <GoMortarBoard className="h-[20px] w-[20px] text-Routecho" />
           <MdPeople className="h-[20px] w-[20px] text-Routecho" />
@@ -588,15 +589,16 @@ function HeroSection(key) {
       )}
 
       {/* right panel */}
-      <div className={`transition-all duration-300  mb-0 ${isSidebarOpen ? 'w-full -ml-2 sm:w-[80%]' : 'w-full sm:w-[94%]'}`}>
+      <div className={`transition-all duration-300  mb-0 ${isSidebarOpen ? 'w-full -ml-2 sm:w-[82%]' : 'w-full sm:w-[94%]'}`}>
         {/* Toggle button for sidebar */}
         <div>
           <button
             onClick={toggleSidebar}
-            className={`absolute top-20 ${isSidebarOpen ? 'left-52' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
+            className={`absolute top-20 ${isSidebarOpen ? 'left-48' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
             style={{ bottom: '12px' }}
           >
-            <SidebarIcon className="text-Routecho text-2xl" />
+            <SidebarIcon className={` text-2xl ${isSidebarOpen ? 'text-Routecho' : 'text-black text-3xl'} `} />
+
           </button>
 
           {/* above filters */}
@@ -898,10 +900,10 @@ function HeroSection(key) {
                           {/* If showFullButton is false, show the FiMessageSquare icon */}
                           {activeItemId !== item.id ? (
                             <button
-                            onClick={() => (
-                              setActiveItemId(item.id)
+                              onClick={() => (
+                                setActiveItemId(item.id)
 
-                            )}
+                              )}
                               className="text-gray-500 hover:bg-gray-200 p-2 rounded-full flex justify-center items-center mt-4"
                             >
                               <CiStickyNote className="w-6 h-6 rounded-full text-lg inline-block items-center mr-2" />
