@@ -573,8 +573,8 @@ function HeroSection(key) {
         <div className="w-[5%] hidden sm:flex min-h-screen  flex-col mt-16 shadow-lg items-center py-4 gap-y-7"
           style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)' }}
         >
-          {/* Sidebar Icons */}
-          {/* <GiBullseye className="h-[20px] w-[20px] text-Routecho" />*/}
+         
+          
           <img
             src={bullie}
             alt="Bullseye Icon"
@@ -585,15 +585,8 @@ function HeroSection(key) {
           <GoMortarBoard className="h-[20px] w-[20px] text-Routecho" />
           <MdPeopleOutline className="h-[20px] w-[20px] text-Routecho" />
           <MdOutlineLeaderboard className="h-[20px] w-[20px] text-Routecho" />
-          <PiSealQuestionThin className="h-[25px] w-[25px] text-Routecho" />
-          {/* <MdAssignment className="h-[20px] w-[20px] text-Routecho" />
-          <BsPatchQuestion className="h-[20px] w-[20px] text-Routecho" /> */}
-
-          {/* Divider */}
+          <PiSealQuestionThin className="h-[25px] w-[25px] text-Routecho" />        
           <hr className="w-full border-t mt-4 border-gray-300" />
-
-          {/* Additional Sidebar Options */}
-
           <IoHomeOutline className="h-[20px] w-[20px] text-Routecho mt-4" />
           <CiCirclePlus className="h-[22px] w-[22px] text-Routecho mt-4" />
           <HiOutlineCog className="h-[20px] w-[20px] text-Routecho mt-4" />
@@ -612,18 +605,18 @@ function HeroSection(key) {
       )}
 
       {/* right panel */}
-      <div className={`transition-all duration-300  mb-0 ${isSidebarOpen ? 'w-full -ml-2 sm:w-[82%]' : 'w-full sm:w-[94%]'}`}>
+      <div className={`transition-all duration-300  mb-0 ${isSidebarOpen ? 'w-full -ml-2 sm:w-[80%]' : 'w-full sm:w-[94%]'}`}>
         {/* Toggle button for sidebar */}
         <div>
           <button
             onClick={toggleSidebar}
-            className={`absolute top-20 ${isSidebarOpen ? 'left-64' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
+            className={`absolute top-20 ${isSidebarOpen ? 'left-52' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
             style={{ bottom: '12px' }}
           >
             {isSidebarOpen ? (
               <SidebarIcon className="text-3xl text-Routecho" />
             ) : (
-              <GoSidebarCollapse className="text-3xl text-black" />
+              <GoSidebarCollapse className="text-3xl  text-black" />
             )}
           </button>
 
@@ -778,7 +771,7 @@ function HeroSection(key) {
                         <span>{data.name}</span>
                         {data.svg[0]}
                         {data.svg[1]}
-                        {data.svg[2]}
+                        {/* {data.svg[2]} */}
                       </th>
                     ))
                   }
