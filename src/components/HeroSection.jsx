@@ -253,7 +253,7 @@ function HeroSection(key) {
 
       {/* Sidebar */}
       {isSidebarOpen && (
-        <div className="w-[24%] min-h-screen border-inp  border-[1px] rounded-md">
+        <div className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 min-h-screen border-inp border-[1px] rounded-md">
           <div className="p-3 w-full bg-white ">
             {/* Spikes Section */}
             <div className="mb-4">
@@ -679,7 +679,7 @@ function HeroSection(key) {
       {/* Closed Sidebar */}
       {!isSidebarOpen && (
         <div
-          className="w-[5%] hidden sm:flex min-h-screen  flex-col mt-16 shadow-lg items-center py-4 gap-y-7"
+          className="w-[5%] hidden sm:flex min-h-screen  flex-col mt-1 shadow-lg items-center py-4 gap-y-7"
           style={{ boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)" }}
         >
           {!isSidebarOpen && (
@@ -758,7 +758,7 @@ function HeroSection(key) {
           )}
 
           {/* above filters */}
-          <div className="flex justify-between space-x-4 ml-5">
+          <div className="flex justify-between space-x-4 ml-10">
             <div className="flex items-center justify-between mx-auto p-4">
               {/* Search Input */}
               <div className="flex items-center flex-1 mr-4 space-x-4">
