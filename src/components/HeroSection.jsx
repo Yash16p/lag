@@ -8,6 +8,7 @@ import {
   MdDescription, MdFilterList, MdArrowBackIosNew, MdArrowForwardIos
 } from 'react-icons/md';
 import { CiCirclePlus } from "react-icons/ci";
+import { MdPeopleOutline } from "react-icons/md";
 
 import { FiPhone, FiMail, FiFileText, FiMessageSquare, FiX } from "react-icons/fi";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle, AiOutlineDown } from "react-icons/ai";
@@ -45,6 +46,7 @@ import { theadData } from './svgdata';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { GoSidebarCollapse } from "react-icons/go";
+import { MdWorkOutline } from "react-icons/md";
 
 function HeroSection(key) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -148,6 +150,15 @@ function HeroSection(key) {
     setPopupVisible(!popupVisible);
     togglePopup(index);
   };
+
+  const [isPopupOpen, setIsPopupOpen] = useState(null);
+
+  // Step 2: Define the togglePopup function
+  const togglePopUp = (index) => {
+    // If the same popup is clicked, close it; otherwise, open the selected one
+    setIsPopupOpen(isPopupOpen === index ? null : index);
+  };
+
 
   const toggleDropdownWE = () => setIsOpenWE(!isOpenWE);
   const toggleDropdownEQ = () => setIsOpenEQ(!isOpenEQ);
@@ -570,9 +581,9 @@ function HeroSection(key) {
             className="w-[40px] h-[40px] text-green-950 bg-[#EEF2FF] rounded-full border-2 p-2"
           />
 
-          <MdOutlineShoppingBag className="h-[20px] w-[20px] text-Routecho" />
+          <MdWorkOutline className="h-[20px] w-[20px] text-Routecho" />
           <GoMortarBoard className="h-[20px] w-[20px] text-Routecho" />
-          <MdPeople className="h-[20px] w-[20px] text-Routecho" />
+          <MdPeopleOutline className="h-[20px] w-[20px] text-Routecho" />
           <MdOutlineLeaderboard className="h-[20px] w-[20px] text-Routecho" />
           <PiSealQuestionThin className="h-[25px] w-[25px] text-Routecho" />
           {/* <MdAssignment className="h-[20px] w-[20px] text-Routecho" />
@@ -582,9 +593,12 @@ function HeroSection(key) {
           <hr className="w-full border-t mt-4 border-gray-300" />
 
           {/* Additional Sidebar Options */}
+
           <IoHomeOutline className="h-[20px] w-[20px] text-Routecho mt-4" />
           <CiCirclePlus className="h-[22px] w-[22px] text-Routecho mt-4" />
           <HiOutlineCog className="h-[20px] w-[20px] text-Routecho mt-4" />
+
+          <hr className="w-full border-t mt-28 border-gray-300" />
 
           {/* Bottom Profile Image */}
           <div className="mt-auto mb-4">
@@ -615,7 +629,7 @@ function HeroSection(key) {
 
 
           {/* above filters */}
-          <div className='space-x-4 ml-5'>
+          <div className='flex justify-between space-x-4 ml-5'>
             <div className='flex items-center justify-between mx-auto p-4'>
               {/* Search Input */}
               <div className="flex items-center flex-1 mr-4 space-x-4"> {/* Added space-x-4 */}
@@ -735,8 +749,8 @@ function HeroSection(key) {
               <thead>
                 <tr className="bg-[#F5F6F3] text-kala font-[600px] h-[56px] Jakarta Sans uppercase text-[13px] leading-normal">
                   <th className="py-3 px-6 text-center">
-                    <div className="flex items-center justify-start">
-                      <input type="checkbox" className="mr-2 bg-inp" />
+                    <div className="flex items-center mr-4 justify-start">
+                      <input type="checkbox" className=" bg-inp" />
                       <span className="ml-2">Name</span>
                       <svg
                         width="24"
@@ -798,20 +812,75 @@ function HeroSection(key) {
                       </td>
 
                       {/* score */}
+
                       <td className="py-3 px-6 text-center">
                         <div className="relative flex items-center justify-center">
-                          <div className="relative">
+                          <div className="relative cursor-pointer" onClick={() => togglePopUp(index)}>
+                            {/* Score donut chart */}
                             <RiDonutChartLine className="text-darkG w-full h-full inline text-3xl" />
                             <span className="absolute inset-0 flex items-center justify-center text-greey text-[10px] font-bold">
                               {item.score}
                             </span>
                           </div>
+
+                          {/* Down arrow for toggling */}
                           <AiOutlineDown
                             className="ml-0 cursor-pointer text-xs"
-                            onClick={() => togglePopup(index)}
+                            onClick={() => togglePopUp(index)}
                           />
+
+                          {/* Popup Scorecard */}
+                          {isPopupOpen === index && (
+                            <div className="absolute top-6 left-16 z-20 w-60 bg-[#F5F6F3] border border-gray-300 shadow-lg rounded-md p-4">
+                              <h3 className="font-bold text-[#004838] mb-2">Candidate Score Card</h3>
+
+                              {/* Domain Knowledge Section */}
+                              <div className="flex justify-between items-center mb-1 p-2 border-[0.64px] rounded bg-[#FFFFFF]">
+                                <span className="text-[14px] font-medium text-[#004838]">Domain Knowledge</span>
+                                <div className="flex items-center">
+                                  {/* 3 yellow stars */}
+                                  <span className="text-yellow-500">★</span>
+                                  <span className="text-yellow-500">★</span>
+                                  <span className="text-yellow-500">★</span>
+                                  {/* 2 gray stars */}
+                                  <span className="text-gray-300">★</span>
+                                  <span className="text-gray-300">★</span>
+                                </div>
+                              </div>
+
+
+                              {/* Repeat the same for other sections */}
+                              <div className="flex justify-between items-center mb-1 border-[0.64px] rounded p-2 bg-[#FFFFFF]">
+                                <span className="text-sm text-[14px] font-medium text-[#004838]">Domain Knowledge</span>
+                                <div className="flex items-center">
+                                  {/* 3 yellow stars */}
+                                  <span className="text-yellow-500">★</span>
+                                  <span className="text-yellow-500">★</span>
+                                  <span className="text-yellow-500">★</span>
+                                  {/* 2 gray stars */}
+                                  <span className="text-gray-300">★</span>
+                                  <span className="text-gray-300">★</span>
+                                </div>
+                              </div>
+
+                              <div className="flex justify-between whitespace-normal border-[0.64px] rounded-lg bg-[#FFFFFF] p-2 items-center mb-1">
+                                <span className="text-sm text-[14px] font-medium text-[#004838]">Domain Knowledge</span>
+                                <div className="flex items-center " >
+                                  {/* 3 yellow stars */}
+                                  <span className="text-yellow-500">★</span>
+                                  <span className="text-yellow-500">★</span>
+
+                                  {/* 2 gray stars */}
+                                  <span className="text-gray-300">★</span>
+                                  <span className="text-gray-300">★</span>
+                                  <span className="text-gray-300">★</span>
+                                </div>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </td>
+
 
                       {/* status */}
                       <td className="py-3 px-6 text-center relative">
@@ -967,7 +1036,9 @@ function HeroSection(key) {
                   />
                   <button
                     className="mt-4 text-green-500"
-                    onClick={saveNote}
+                    onClick={() => (
+                      setShowNotePopup((prevState) => !prevState)
+                    )}
                   >
                     Save
                   </button>
