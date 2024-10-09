@@ -42,6 +42,9 @@ import { FaLinkedin } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6";
 import { theadData } from './svgdata';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import { GoSidebarCollapse } from "react-icons/go";
 
 function HeroSection(key) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -52,6 +55,12 @@ function HeroSection(key) {
   const handleChange = (e) => {
     setValue(e.target.value); // Update the value on change
   };
+
+  const [range, setRange] = useState([2, 6]); // Initial values for the slider
+
+  const handleRangeChange = (value) => {
+    setRange(value);
+  }
 
   const [isOpenEQ, setIsOpenEQ] = useState(false);
   const [isOpenSS, setIsOpenSS] = useState(false);
@@ -299,34 +308,29 @@ function HeroSection(key) {
                     </div>
                     {/* <input type='range' min='0' max='20' className='w-full mt-2 text-green-700' />
                      */}
-                    <div>
-                      <input
-                        type="range"
-                        min="0"
-                        max="20"
-                        value={value} // Set the value to the state variable
-                        onChange={handleChange} // Handle change events
-                        className="w-full mt-2"
-                        style={{
-                          appearance: 'none',
-                          width: '100%',
-                          height: '8px',
-                          background: 'linear-gradient(to right, #004838 ' + (value / 20) * 100 + '%, #e0e0e0 ' + (value / 20) * 100 + '%) no-repeat', // Dark green track based on value
-                          borderRadius: '5px',
-                          outline: 'green',
-                          padding: '0',
-                          cursor: 'pointer',
-                        }}
+                    <div className="flex items-center mt-2">
+                      <Slider
+                        range
+                        min={1}
+                        max={10}
+                        value={range}
+                        onChange={handleRangeChange}
+                        trackStyle={[{ backgroundColor: '#004838', height: 4 }]} // Track between thumbs
+                        handleStyle={[
+                          { borderColor: '#004838', height: 16, width: 16, marginTop: -7, backgroundColor: '#ffffff' }, // Thumb styles
+                          { borderColor: '#004838', height: 16, width: 16, marginTop: -7 },
+                        ]}
+                        railStyle={{ backgroundColor: '#d1d5db', height: 6 }} // Rail (background track)
                       />
-                      <div className="mt-2">Years: {value}</div> {/* Display the current value */}
+                    </div>
+
+                    <div className="flex justify-between mt-2 text-gray-700">
+                      <span>{range[0]} Years</span>
+                      <span>{range[1]} Years</span>
                     </div>
 
 
-                    <div className='flex justify-between'>
 
-                      <span>0 Yrs</span>
-                      <span>20 Yrs</span>
-                    </div>
                     <div className='flex justify-between items-center mt-5'>
                       <p className='text-green-600'>Job Role</p>
                       <div className='flex items-center space-x-2'>
@@ -560,7 +564,12 @@ function HeroSection(key) {
         >
           {/* Sidebar Icons */}
           {/* <GiBullseye className="h-[20px] w-[20px] text-Routecho" />*/}
-          <img src={bullie} className='w-[25px] h-[25px] text-green-950 rounded-full bg-[#EEF2FF]' />
+          <img
+            src={bullie}
+            alt="Bullseye Icon"
+            className="w-[40px] h-[40px] text-green-950 bg-[#EEF2FF] rounded-full border-2 p-2"
+          />
+
           <MdOutlineShoppingBag className="h-[20px] w-[20px] text-Routecho" />
           <GoMortarBoard className="h-[20px] w-[20px] text-Routecho" />
           <MdPeople className="h-[20px] w-[20px] text-Routecho" />
@@ -594,12 +603,16 @@ function HeroSection(key) {
         <div>
           <button
             onClick={toggleSidebar}
-            className={`absolute top-20 ${isSidebarOpen ? 'left-48' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
+            className={`absolute top-20 ${isSidebarOpen ? 'left-64' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
             style={{ bottom: '12px' }}
           >
-            <SidebarIcon className={` text-2xl ${isSidebarOpen ? 'text-Routecho' : 'text-black text-3xl'} `} />
-
+            {isSidebarOpen ? (
+              <SidebarIcon className="text-3xl text-Routecho" />
+            ) : (
+              <GoSidebarCollapse className="text-3xl text-black" />
+            )}
           </button>
+
 
           {/* above filters */}
           <div className='space-x-4 ml-5'>
