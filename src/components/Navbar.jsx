@@ -15,7 +15,7 @@ import { PiExportLight } from "react-icons/pi";
 const Navbar = () => {
   return (
     <nav className="bg-white">
-      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+      <div className="container mx-2 py-2 flex justify-between items-center">
         {/* Left section: Logo and Title */}
         <div className="relative left-0 flex items-center space-x-2 sm:space-x-4"> {/* Adjusted space for small and larger screens */}
           {/* Logo */}
@@ -29,7 +29,7 @@ const Navbar = () => {
         </div>
 
         {/* Right section: Icons */}
-        <div className="flex flex-wrap items-center space-x-4 text-xl mt-4 sm:mt-0">
+        <div className="relative -right-32 flex flex-wrap space-x-4 text-xl mt-4 sm:mt-0">
 
           <button className='flex justify-center items-center border-4 w-[43px] h-[43px] border-green-800 bg-customGreen rounded-full'>
             <img src={avatar} className='w-[25px] h-[19px]' alt="avatar" />
