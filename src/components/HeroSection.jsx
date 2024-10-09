@@ -743,7 +743,7 @@ function HeroSection(key) {
         {/* main content */}
         <div className="p-0 border-name ml-5">
           <div className="ml-5 w-full mx-auto min-h-96">
-            <table className="min-w-full bg-white border-name border-2 rounded-lg shadow-md">
+            <table className="relative -right-4 min-w-full bg-white border-name border-2 rounded-lg shadow-md">
               <thead>
                 <tr className="bg-[#F5F6F3] text-kala font-[600px] h-[56px] Jakarta Sans uppercase text-[13px] leading-normal">
                   <th className="py-3 px-4 text-left">
