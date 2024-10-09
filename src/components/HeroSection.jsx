@@ -275,12 +275,12 @@ function HeroSection(key) {
               </div>
 
               <div className="mt-4 flex gap-x-7">
-                <label className="flex items-center text-green-700 text-[14px] bg-bord rounded-md p-1 pl-2 pr-2">
+                <label className="flex items-center text-green-700 text-[12px] bg-bord rounded-md p-1 pl-2 pr-2">
                   <input type="checkbox" className="mr-2 text-green-700" />
                   B-Tech
                   <IoIosClose className="w-[18px] h-[18px] text-Routecho ml-1" />
                 </label>
-                <label className="flex items-center text-green-700 text-[14px] bg-bord rounded-md p-1 pl-2 pr-2">
+                <label className="flex items-center text-green-700 text-[12px] bg-bord rounded-md p-1 pl-2 pr-2">
                   <input type="checkbox" className="mr-2 text-green-700" />
                   3-4 Yrs
                   <IoIosClose className="w-[18px] h-[18px] text-Routecho ml-1" />
@@ -762,7 +762,7 @@ function HeroSection(key) {
             <FiSearch className="text-Routecho text-xl mr-2" />
             <input
               type="text"
-              className={`search-box ${isSidebarOpen ? "w-[231px] sm:w-[320px] lg:w-[350px]" : "w-[440px] sm:w-[500px] lg:w-[550px]"
+              className={`search-box ${isSidebarOpen ? "w-[231px] sm:w-[320px] lg:w-[208px]" : "w-[440px] sm:w-[500px] lg:w-[370px]"
                 }`}
               style={{ height: "41px" }}
               placeholder="Candidates with 3+ years experience in MERN Stack"
@@ -845,7 +845,7 @@ function HeroSection(key) {
               onClick={() => toggleDropdown("Hard Skills")}
             >
               <MdOutlineLeaderboard className="text-xl" />
-              Hard Skills
+               Skills
               <TbChevronDown className="ml-7 sm:ml-8 lg:ml-11 text-xl" />
             </button>
 
@@ -863,6 +863,7 @@ function HeroSection(key) {
       </div>
     </div>
   </div>
+
 
         {/* main content */}
         <div className="p-0 border-name ml-5">
