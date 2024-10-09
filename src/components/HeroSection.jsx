@@ -326,10 +326,10 @@ function HeroSection(key) {
                         max={10}
                         value={range}
                         onChange={handleRangeChange}
-                        trackStyle={[{ backgroundColor: '#004838', height: 4 }]} // Track between thumbs
+                        trackStyle={[{ backgroundColor: '#004838', height: 6 }]} // Track between thumbs
                         handleStyle={[
-                          { borderColor: '#004838', height: 16, width: 16, marginTop: -7, backgroundColor: '#ffffff' }, // Thumb styles
-                          { borderColor: '#004838', height: 16, width: 16, marginTop: -7 },
+                          { borderColor: '#004838', height: 14, width: 14, marginTop: -4, backgroundColor: '#ffffff' }, // Thumb styles
+                          { borderColor: '#004838', height: 14, width: 14, marginTop: -4 },
                         ]}
                         railStyle={{ backgroundColor: '#d1d5db', height: 6 }} // Rail (background track)
                       />
@@ -573,8 +573,8 @@ function HeroSection(key) {
         <div className="w-[5%] hidden sm:flex min-h-screen  flex-col mt-16 shadow-lg items-center py-4 gap-y-7"
           style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)' }}
         >
-         
-          
+
+
           <img
             src={bullie}
             alt="Bullseye Icon"
@@ -585,7 +585,7 @@ function HeroSection(key) {
           <GoMortarBoard className="h-[20px] w-[20px] text-Routecho" />
           <MdPeopleOutline className="h-[20px] w-[20px] text-Routecho" />
           <MdOutlineLeaderboard className="h-[20px] w-[20px] text-Routecho" />
-          <PiSealQuestionThin className="h-[25px] w-[25px] text-Routecho" />        
+          <PiSealQuestionThin className="h-[25px] w-[25px] text-Routecho" />
           <hr className="w-full border-t mt-4 border-gray-300" />
           <IoHomeOutline className="h-[20px] w-[20px] text-Routecho mt-4" />
           <CiCirclePlus className="h-[22px] w-[22px] text-Routecho mt-4" />
@@ -610,15 +610,20 @@ function HeroSection(key) {
         <div>
           <button
             onClick={toggleSidebar}
-            className={`absolute top-20 ${isSidebarOpen ? 'left-52' : 'left-3'} z-10 p-4 w-12 h-12 rounded-md`}
-            style={{ bottom: '12px' }}
+            className={`absolute top-20 ${isSidebarOpen ? 'left-52' : 'left-1'} z-10 p-4 w-12 h-12 rounded-md`}
+            style={{
+              bottom: '12px',
+              // boxShadow: !isSidebarOpen ? '1px 0px 6px rgba(0, 0, 0, 0.3)' : 'none'  // Apply shadow only when sidebar is closed
+            }}
           >
             {isSidebarOpen ? (
               <SidebarIcon className="text-3xl text-Routecho" />
             ) : (
-              <GoSidebarCollapse className="text-3xl  text-black" />
+              <GoSidebarCollapse className="text-3xl text-black" />
             )}
           </button>
+
+
 
 
           {/* above filters */}
@@ -741,8 +746,8 @@ function HeroSection(key) {
             <table className="min-w-full bg-white border-name border-2 rounded-lg shadow-md">
               <thead>
                 <tr className="bg-[#F5F6F3] text-kala font-[600px] h-[56px] Jakarta Sans uppercase text-[13px] leading-normal">
-                  <th className="py-3 px-6 text-center">
-                    <div className="flex items-center mr-4 justify-start">
+                  <th className="py-3 px-4 text-left">
+                    <div className="flex items-center justify-start">
                       <input type="checkbox" className=" bg-inp" />
                       <span className="ml-2">Name</span>
                       <svg
