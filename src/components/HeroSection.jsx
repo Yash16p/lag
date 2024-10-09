@@ -685,9 +685,8 @@ function HeroSection(key) {
           {!isSidebarOpen && (
             <button
               onClick={toggleSidebar}
-              className={`${
-                isSidebarOpen ? "left-52" : "left-1"
-              } z-10 p-4 w-12 h-12 rounded-md`}
+              className={`${isSidebarOpen ? "left-52" : "left-1"
+                } z-10 p-4 w-12 h-12 rounded-md`}
               style={{
                 bottom: "12px",
                 // boxShadow: !isSidebarOpen ? '1px 0px 6px rgba(0, 0, 0, 0.3)' : 'none'  // Apply shadow only when sidebar is closed
@@ -732,168 +731,138 @@ function HeroSection(key) {
 
       {/* right panel */}
       <div
-        className={`transition-all duration-300  mb-0 ${
-          isSidebarOpen ? "w-full -ml-2 sm:w-[80%]" : "w-full sm:w-[94%]"
-        }`}
+  className={`transition-all duration-300 mb-0 ${isSidebarOpen ? "w-full -ml-2 sm:w-[80%]" : "w-full sm:w-[94%]"
+    }`}
+>
+  {/* Toggle button for sidebar */}
+  <div>
+    {isSidebarOpen && (
+      <button
+        onClick={toggleSidebar}
+        className={`absolute top-20 ${isSidebarOpen ? "left-52" : "left-1"
+          } z-10 p-4 w-12 h-12 rounded-md`}
+        style={{
+          bottom: "12px",
+        }}
       >
-        {/* Toggle button for sidebar */}
-        <div>
-          {isSidebarOpen && (
-            <button
-              onClick={toggleSidebar}
-              className={`absolute top-20 ${
-                isSidebarOpen ? "left-52" : "left-1"
-              } z-10 p-4 w-12 h-12 rounded-md`}
-              style={{
-                bottom: "12px",
-                // boxShadow: !isSidebarOpen ? '1px 0px 6px rgba(0, 0, 0, 0.3)' : 'none'  // Apply shadow only when sidebar is closed
-              }}
-            >
-              {isSidebarOpen ? (
-                <SidebarIcon className="text-3xl text-Routecho" />
-              ) : (
-                <GoSidebarCollapse className="text-3xl text-black" />
-              )}
-            </button>
-          )}
+        {isSidebarOpen ? (
+          <SidebarIcon className="text-3xl text-Routecho" />
+        ) : (
+          <GoSidebarCollapse className="text-3xl text-black" />
+        )}
+      </button>
+    )}
 
-          {/* above filters */}
-          <div className="flex justify-between space-x-4 ml-10">
-            <div className="flex items-center justify-between mx-auto p-4">
-              {/* Search Input */}
-              <div className="flex items-center flex-1 mr-4 space-x-4">
-                {" "}
-                {/* Added space-x-4 */}
-                <div className="flex items-center border-2 rounded-md px-2">
-                  <FiSearch className="text-Routecho text-xl mr-2" />{" "}
-                  {/* Search icon */}
-                  <input
-                    type="text"
-                    className={`search-box ${
-                      isSidebarOpen ? "w-[231px]" : "w-[440px]"
-                    }`}
-                    style={{ height: "41px" }}
-                    placeholder="Candidates with 3+ years experience in MERN Stack"
-                  />
-                </div>
-              </div>
-
-              {/* Dropdown Buttons */}
-              <div className="flex items-center space-x-5">
-                {" "}
-                {/* Kept space-x-4 for uniform spacing */}
-                {/* Status Button */}
-                <div className="relative">
-                  <button
-                    className="flex items-center w-[170px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
-                    onClick={() => toggleDropdown("Status")}
-                  >
-                    <TbCheckbox className="text-xl" />
-                    <span className="ml-2">Status</span>
-                    <TbChevronDown className="ml-11 text-xl" />
-                  </button>
-
-                  {currentDropdown === "Status" && (
-                    <div className="absolute z-50 mt-1 w-full bg-white border border-greey rounded-md shadow-lg">
-                      <ul>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 1
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 2
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 3
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                {/* Experience Button */}
-                <div className="relative">
-                  <button
-                    className="flex items-center w-[170px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
-                    onClick={() => toggleDropdown("Experience")}
-                  >
-                    <MdOutlineShoppingBag className="text-xl" />
-                    Experience
-                    <TbChevronDown className="ml-11 text-2xl" />
-                  </button>
-
-                  {currentDropdown === "Experience" && (
-                    <div className="absolute z-50 mt-1 w-full bg-white border border-greey rounded-md shadow-lg">
-                      <ul>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 1
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 2
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 3
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                {/* Degree Button */}
-                <div className="relative">
-                  <button
-                    className="flex items-center w-[164px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
-                    onClick={() => toggleDropdown("Degree")}
-                  >
-                    <GoMortarBoard className="text-xl" />
-                    Degree
-                    <TbChevronDown className="ml-11 text-xl" />
-                  </button>
-
-                  {currentDropdown === "Degree" && (
-                    <div className="absolute z-50 left-0 mt-1 w-40 bg-white border border-gray-300 rounded-md shadow-lg">
-                      <ul>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 1
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 2
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 3
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                {/* Hard Skills Button */}
-                <div className="relative">
-                  <button
-                    className="flex items-center w-[170px] h-[41px] px-2 py-1 text-[14px] whitespace-nowrap gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
-                    onClick={() => toggleDropdown("Hard Skills")}
-                  >
-                    <MdOutlineLeaderboard className="text-xl" />
-                    Hard Skills
-                    <TbChevronDown className="ml-7 text-xl" />
-                  </button>
-
-                  {currentDropdown === "Hard Skills" && (
-                    <div className="absolute z-50 left-0 mt-1 w-40 bg-white border border-gray-300 rounded-md shadow-lg">
-                      <ul>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 1
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 2
-                        </li>
-                        <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                          Option 3
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+    {/* above filters */}
+    <div className="flex justify-between space-x-4 ml-4 md:ml-8 lg:ml-10">
+      <div className="flex items-center justify-between mx-auto p-4">
+        {/* Search Input */}
+        <div className="flex items-center flex-1 mr-4 space-x-4">
+          <div className="flex items-center border-2 rounded-md px-2">
+            <FiSearch className="text-Routecho text-xl mr-2" />
+            <input
+              type="text"
+              className={`search-box ${isSidebarOpen ? "w-[231px] sm:w-[320px] lg:w-[350px]" : "w-[440px] sm:w-[500px] lg:w-[550px]"
+                }`}
+              style={{ height: "41px" }}
+              placeholder="Candidates with 3+ years experience in MERN Stack"
+            />
           </div>
         </div>
+
+        {/* Dropdown Buttons */}
+        <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-5">
+          {/* Status Button */}
+          <div className="relative">
+            <button
+              className="flex items-center w-[140px] sm:w-[150px] lg:w-[170px] h-[41px] px-2 py-1 text-[12px] sm:text-[14px] gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
+              onClick={() => toggleDropdown("Status")}
+            >
+              <TbCheckbox className="text-xl" />
+              <span className="ml-2">Status</span>
+              <TbChevronDown className="ml-8 sm:ml-10 lg:ml-11 text-xl" />
+            </button>
+
+            {currentDropdown === "Status" && (
+              <div className="absolute z-50 mt-1 w-full bg-white border border-greey rounded-md shadow-lg">
+                <ul>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 1</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 2</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 3</li>
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Experience Button */}
+          <div className="relative">
+            <button
+              className="flex items-center w-[140px] sm:w-[150px] lg:w-[170px] h-[41px] px-2 py-1 text-[12px] sm:text-[14px] gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
+              onClick={() => toggleDropdown("Experience")}
+            >
+              <MdOutlineShoppingBag className="text-xl" />
+              Experience
+              <TbChevronDown className="ml-8 sm:ml-10 lg:ml-11 text-2xl" />
+            </button>
+
+            {currentDropdown === "Experience" && (
+              <div className="absolute z-50 mt-1 w-full bg-white border border-greey rounded-md shadow-lg">
+                <ul>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 1</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 2</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 3</li>
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Degree Button */}
+          <div className="relative">
+            <button
+              className="flex items-center w-[140px] sm:w-[150px] lg:w-[164px] h-[41px] px-2 py-1 text-[12px] sm:text-[14px] gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
+              onClick={() => toggleDropdown("Degree")}
+            >
+              <GoMortarBoard className="text-xl" />
+              Degree
+              <TbChevronDown className="ml-8 sm:ml-10 lg:ml-11 text-xl" />
+            </button>
+
+            {currentDropdown === "Degree" && (
+              <div className="absolute z-50 left-0 mt-1 w-40 bg-white border border-gray-300 rounded-md shadow-lg">
+                <ul>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 1</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 2</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 3</li>
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Hard Skills Button */}
+          <div className="relative">
+            <button
+              className="flex items-center w-[140px] sm:w-[150px] lg:w-[170px] h-[41px] px-2 py-1 text-[12px] sm:text-[14px] gap-1 border-inp border-[1px] text-Routecho font-medium rounded-md"
+              onClick={() => toggleDropdown("Hard Skills")}
+            >
+              <MdOutlineLeaderboard className="text-xl" />
+              Hard Skills
+              <TbChevronDown className="ml-7 sm:ml-8 lg:ml-11 text-xl" />
+            </button>
+
+            {currentDropdown === "Hard Skills" && (
+              <div className="absolute z-50 left-0 mt-1 w-40 bg-white border border-gray-300 rounded-md shadow-lg">
+                <ul>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 1</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 2</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Option 3</li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
         {/* main content */}
         <div className="p-0 border-name ml-5">
@@ -1053,18 +1022,18 @@ function HeroSection(key) {
                               item.status === "Shortlisted"
                                 ? "#F0FFF8"
                                 : item.status === "Waitlisted"
-                                ? "#FEFFE5"
-                                : item.status === "Rejected"
-                                ? "#FFF0F0"
-                                : "transparent",
+                                  ? "#FEFFE5"
+                                  : item.status === "Rejected"
+                                    ? "#FFF0F0"
+                                    : "transparent",
                             color:
                               item.status === "Shortlisted"
                                 ? "#28A745"
                                 : item.status === "Waitlisted"
-                                ? "#FFC107"
-                                : item.status === "Rejected"
-                                ? "#DC3545"
-                                : "black",
+                                  ? "#FFC107"
+                                  : item.status === "Rejected"
+                                    ? "#DC3545"
+                                    : "black",
                             padding: "8px 16px",
                             borderRadius: "12px",
                             border: "1px solid transparent",
@@ -1081,10 +1050,10 @@ function HeroSection(key) {
                                 item.status === "Shortlisted"
                                   ? "#28A745"
                                   : item.status === "Waitlisted"
-                                  ? "#FFC107"
-                                  : item.status === "Rejected"
-                                  ? "#DC3545"
-                                  : "black",
+                                    ? "#FFC107"
+                                    : item.status === "Rejected"
+                                      ? "#DC3545"
+                                      : "black",
                             }}
                           />
                         </div>
